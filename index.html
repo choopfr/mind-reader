@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read My Mind</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            width: 0;
+            background-color: #76c7c0;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Read My Mind</h1>
+        <p>Give me a number between 1 and 100:</p>
+        <input type="number" id="number-input" min="1" max="100">
+        <button id="read-mind">Read My Mind</button>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        <p id="status"></p>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        document.getElementById("read-mind").addEventListener("click", async () => {
+            const input = document.getElementById("number-input").value;
+            const status = document.getElementById("status");
+            const result = document.getElementById("result");
+            const progress = document.getElementById("progress");
+
+            // Validate input
+            if (!input || input < 1 || input > 100) {
+                alert("Please enter a valid number between 1 and 100.");
+                return;
+            }
+
+            // Disable the button
+            document.getElementById("read-mind").disabled = true;
+
+            // Simulate progress bar
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 10;
+                progress.style.width = `${width}%`;
+                if (width >= 100) clearInterval(interval);
+            }, 500);
+
+            // Simulate the backend process
+            setTimeout(() => {
+                // Simulate the "mind-reading" process
+                const blurbs = [
+                    "reading your mind...",
+                    "calibrating sensors...",
+                    "scanning brainwaves...",
+                    "almost there..."
+                ];
+
+                blurbs.forEach((blurb, index) => {
+                    setTimeout(() => {
+                        status.textContent = blurb;
+                    }, index * 1000);
+                });
+
+                // Return the result after 4 seconds
+                setTimeout(() => {
+                    result.textContent = `really... ${input}? that's too easy`;
+                    document.getElementById("read-mind").disabled = false;
+                    progress.style.width = "0%"; // Reset progress bar
+                }, 4000);
+            }, 0);
+        });
+    </script>
+</body>
+</html>
