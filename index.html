@@ -3,50 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Read My Mind</title>
+    <title>read my mind</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0;
+            background-color: black;
             margin: 0;
+            color: white;
         }
         .container {
             text-align: center;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
         input, button {
             padding: 10px;
             margin: 10px 0;
             font-size: 16px;
+            font-family: 'Times New Roman', serif;
+            background-color: rgba(255, 255, 255, 0.1); 
+            color: white;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        button {
+            cursor: pointer;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         .progress-bar {
             width: 100%;
             height: 20px;
-            background-color: #e0e0e0;
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
         }
         .progress {
             height: 100%;
             width: 0;
-            background-color: #76c7c0;
+            background-color: green;
             transition: width 0.5s;
+        }
+        #status, #result {
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Read My Mind</h1>
-        <p>Give me a number between 1 and 100:</p>
-        <input type="number" id="number-input" min="1" max="100">
-        <button id="read-mind">Read My Mind</button>
+        <h1>read my mind</h1>
+        <p>give me a number from 1-100</p>
+        <input type="number" id="number-input" min="1" max="100" placeholder="Enter a number">
+        <button id="read-mind">enter</button>
         <div class="progress-bar">
             <div class="progress" id="progress"></div>
         </div>
@@ -63,7 +82,7 @@
 
             // Validate input
             if (!input || input < 1 || input > 100) {
-                alert("Please enter a valid number between 1 and 100.");
+                alert("enter a valid number between 1-100");
                 return;
             }
 
