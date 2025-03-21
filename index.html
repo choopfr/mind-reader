@@ -111,8 +111,12 @@
             const interval = setInterval(() => {
                 width += 10;
                 progress.style.width = `${width}%`;
-                if (width >= 100) clearInterval(interval);
-            }, 500);
+                if (width >= 100) {
+                    clearInterval(interval); // Stop the interval when the bar is full
+                    // Show the result after the bar is fully filled
+                    result.textContent = `got it! your number is ${input}.`;
+                }
+            }, 500); // Update the bar every 500ms (10% per step)
 
             // Simulate the "mind-reading" process
             const blurbs = [
@@ -125,13 +129,8 @@
             blurbs.forEach((blurb, index) => {
                 setTimeout(() => {
                     status.textContent = blurb;
-                }, index * 1000);
+                }, index * 1000); // Update status every second
             });
-
-            // Show the result after the progress bar finishes
-            setTimeout(() => {
-                result.textContent = `got it! Your number is ${input}.`;
-            }, 5000); // 5 seconds (5000ms) to match the progress bar animation
         });
     </script>
 </body>
