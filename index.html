@@ -113,8 +113,18 @@
                 progress.style.width = `${width}%`;
                 if (width >= 100) {
                     clearInterval(interval); // Stop the interval when the bar is full
-                    // Show the result after the bar is fully filled
-                    result.textContent = `got it! your number is ${input}.`;
+
+                    // Randomly select a result blurb
+                    const resultBlurbs = [
+                        `got it! your number is ${input}.`,
+                        `hmm... ${input}, right?`,
+                        `i knew it! ${input} was your number.`,
+                        `easy peasy! your number is ${input}.`,
+                        `mind reading complete! it's ${input}.`,
+                        `you thought of ${input}, didn't you?`
+                    ];
+                    const randomBlurb = resultBlurbs[Math.floor(Math.random() * resultBlurbs.length)];
+                    result.textContent = randomBlurb;
                 }
             }, 500); // Update the bar every 500ms (10% per step)
 
@@ -128,7 +138,7 @@
 
             blurbs.forEach((blurb, index) => {
                 setTimeout(() => {
-                    status.textContent = blurb;
+                    status.textContent = blurb.toLowerCase(); // Ensure blurbs are lowercase
                 }, index * 1000); // Update status every second
             });
         });
