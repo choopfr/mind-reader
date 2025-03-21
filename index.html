@@ -21,8 +21,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            width: 90%; /* Make the container wider and responsive */
-            max-width: 600px; /* Set a maximum width for larger screens */
+            width: 90%;
+            max-width: 600px;
         }
         input, button {
             padding: 10px;
@@ -33,8 +33,8 @@
             color: white;
             border: 1px solid white;
             border-radius: 5px;
-            width: 80%; /* Make input and button wider */
-            max-width: 400px; /* Set a maximum width for larger screens */
+            width: 80%;
+            max-width: 400px;
         }
         input::placeholder {
             color: rgba(255, 255, 255, 0.7);
@@ -47,13 +47,13 @@
             cursor: not-allowed;
         }
         .progress-bar {
-            width: 80%; /* Make progress bar wider */
-            max-width: 400px; /* Set a maximum width for larger screens */
+            width: 80%;
+            max-width: 400px;
             height: 20px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
-            margin: 0 auto; /* Center the progress bar */
+            margin: 20px auto; /* Added margin above the loading bar */
         }
         .progress {
             height: 100%;
@@ -63,20 +63,10 @@
         }
         #status, #result {
             color: white;
+            margin-top: 20px; /* Added margin above the result */
         }
-
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 600px) {
-            .container {
-                width: 95%; /* Make the container even wider on smaller screens */
-                padding: 15px;
-            }
-            input, button {
-                width: 90%; /* Make input and button wider on smaller screens */
-            }
-            .progress-bar {
-                width: 90%; /* Make progress bar wider on smaller screens */
-            }
+        .hidden {
+            display: none; /* Utility class to hide elements */
         }
     </style>
 </head>
@@ -84,13 +74,17 @@
     <div class="container">
         <h1>read my mind</h1>
         <p>give me a number from 1-100</p>
-        <input type="number" id="number-input" min="1" max="100" placeholder="guess">
-        <button id="read-mind">enter</button>
-        <div class="progress-bar">
-            <div class="progress" id="progress"></div>
+        <div id="input-section">
+            <input type="number" id="number-input" min="1" max="100" placeholder="guess">
+            <button id="read-mind">enter</button>
         </div>
-        <p id="status"></p>
-        <p id="result"></p>
+        <div id="loading-section" class="hidden">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <p id="status"></p>
+            <p id="result"></p>
+        </div>
     </div>
 
     <script>
@@ -99,6 +93,8 @@
             const status = document.getElementById("status");
             const result = document.getElementById("result");
             const progress = document.getElementById("progress");
+            const inputSection = document.getElementById("input-section");
+            const loadingSection = document.getElementById("loading-section");
 
             // Validate input
             if (!input || input < 1 || input > 100) {
@@ -106,8 +102,9 @@
                 return;
             }
 
-            // Disable the button
-            document.getElementById("read-mind").disabled = true;
+            // Hide input section and show loading section
+            inputSection.classList.add("hidden");
+            loadingSection.classList.remove("hidden");
 
             // Simulate progress bar
             let width = 0;
@@ -136,8 +133,6 @@
                 // Return the result after 4 seconds
                 setTimeout(() => {
                     result.textContent = `really... ${input}? that's too easy`;
-                    document.getElementById("read-mind").disabled = false;
-                    progress.style.width = "0%"; // Reset progress bar
                 }, 4000);
             }, 0);
         });
