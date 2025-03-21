@@ -53,7 +53,7 @@
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
-            margin: 20px auto; /* Added margin above the loading bar */
+            margin: 20px auto;
         }
         .progress {
             height: 100%;
@@ -63,10 +63,10 @@
         }
         #status, #result {
             color: white;
-            margin-top: 20px; /* Added margin above the result */
+            margin-top: 20px;
         }
         .hidden {
-            display: none; /* Utility class to hide elements */
+            display: none;
         }
     </style>
 </head>
@@ -114,27 +114,24 @@
                 if (width >= 100) clearInterval(interval);
             }, 500);
 
-            // Simulate the backend process
-            setTimeout(() => {
-                // Simulate the "mind-reading" process
-                const blurbs = [
-                    "reading your mind...",
-                    "calibrating sensors...",
-                    "scanning brainwaves...",
-                    "almost there..."
-                ];
+            // Simulate the "mind-reading" process
+            const blurbs = [
+                "reading your mind...",
+                "calibrating sensors...",
+                "scanning brainwaves...",
+                "almost there..."
+            ];
 
-                blurbs.forEach((blurb, index) => {
-                    setTimeout(() => {
-                        status.textContent = blurb;
-                    }, index * 1000);
-                });
-
-                // Return the result after 4 seconds
+            blurbs.forEach((blurb, index) => {
                 setTimeout(() => {
-                    result.textContent = `really... ${input}? that's too easy`;
-                }, 4000);
-            }, 0);
+                    status.textContent = blurb;
+                }, index * 1000);
+            });
+
+            // Show the result after the progress bar finishes
+            setTimeout(() => {
+                result.textContent = `got it! Your number is ${input}.`;
+            }, 5000); // 5 seconds (5000ms) to match the progress bar animation
         });
     </script>
 </body>
