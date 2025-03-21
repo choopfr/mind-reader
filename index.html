@@ -21,16 +21,20 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            width: 90%; /* Make the container wider and responsive */
+            max-width: 600px; /* Set a maximum width for larger screens */
         }
         input, button {
             padding: 10px;
             margin: 10px 0;
             font-size: 16px;
             font-family: 'Times New Roman', serif;
-            background-color: rgba(255, 255, 255, 0.1); 
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
             border: 1px solid white;
             border-radius: 5px;
+            width: 80%; /* Make input and button wider */
+            max-width: 400px; /* Set a maximum width for larger screens */
         }
         input::placeholder {
             color: rgba(255, 255, 255, 0.7);
@@ -43,11 +47,13 @@
             cursor: not-allowed;
         }
         .progress-bar {
-            width: 100%;
+            width: 80%; /* Make progress bar wider */
+            max-width: 400px; /* Set a maximum width for larger screens */
             height: 20px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             overflow: hidden;
+            margin: 0 auto; /* Center the progress bar */
         }
         .progress {
             height: 100%;
@@ -58,13 +64,27 @@
         #status, #result {
             color: white;
         }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%; /* Make the container even wider on smaller screens */
+                padding: 15px;
+            }
+            input, button {
+                width: 90%; /* Make input and button wider on smaller screens */
+            }
+            .progress-bar {
+                width: 90%; /* Make progress bar wider on smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>read my mind</h1>
         <p>give me a number from 1-100</p>
-        <input type="number" id="number-input" min="1" max="100" placeholder="Enter a number">
+        <input type="number" id="number-input" min="1" max="100" placeholder="guess">
         <button id="read-mind">enter</button>
         <div class="progress-bar">
             <div class="progress" id="progress"></div>
